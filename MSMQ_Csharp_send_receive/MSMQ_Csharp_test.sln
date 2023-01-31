@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSMQ_Csharp_test", "MSMS_Charp_test\MSMQ_Csharp_test.csproj", "{95612388-00DA-4E90-B0E0-6D44B70A499B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95612388-00DA-4E90-B0E0-6D44B70A499B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95612388-00DA-4E90-B0E0-6D44B70A499B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95612388-00DA-4E90-B0E0-6D44B70A499B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95612388-00DA-4E90-B0E0-6D44B70A499B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC5F1BC9-10A1-4653-9E71-F738E11313E2}
+	EndGlobalSection
+EndGlobal
