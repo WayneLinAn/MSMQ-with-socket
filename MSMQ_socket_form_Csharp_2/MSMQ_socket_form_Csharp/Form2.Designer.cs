@@ -38,9 +38,10 @@ namespace MSMQ_socket_form_Csharp
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(87, 44);
+            this.btnConnect.Location = new System.Drawing.Point(135, 91);
+            this.btnConnect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(108, 38);
+            this.btnConnect.Size = new System.Drawing.Size(72, 25);
             this.btnConnect.TabIndex = 0;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -48,9 +49,10 @@ namespace MSMQ_socket_form_Csharp
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(87, 88);
+            this.btnSend.Location = new System.Drawing.Point(135, 121);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(108, 40);
+            this.btnSend.Size = new System.Drawing.Size(72, 27);
             this.btnSend.TabIndex = 1;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
@@ -58,9 +60,10 @@ namespace MSMQ_socket_form_Csharp
             // 
             // btnDisconnect
             // 
-            this.btnDisconnect.Location = new System.Drawing.Point(87, 134);
+            this.btnDisconnect.Location = new System.Drawing.Point(135, 151);
+            this.btnDisconnect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDisconnect.Name = "btnDisconnect";
-            this.btnDisconnect.Size = new System.Drawing.Size(108, 38);
+            this.btnDisconnect.Size = new System.Drawing.Size(72, 25);
             this.btnDisconnect.TabIndex = 2;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
@@ -68,16 +71,18 @@ namespace MSMQ_socket_form_Csharp
             // 
             // txtData
             // 
-            this.txtData.Location = new System.Drawing.Point(87, 192);
+            this.txtData.Location = new System.Drawing.Point(135, 190);
+            this.txtData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(327, 29);
+            this.txtData.Size = new System.Drawing.Size(219, 22);
             this.txtData.TabIndex = 3;
             // 
             // btnDetect
             // 
-            this.btnDetect.Location = new System.Drawing.Point(260, 44);
+            this.btnDetect.Location = new System.Drawing.Point(250, 91);
+            this.btnDetect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDetect.Name = "btnDetect";
-            this.btnDetect.Size = new System.Drawing.Size(108, 38);
+            this.btnDetect.Size = new System.Drawing.Size(72, 25);
             this.btnDetect.TabIndex = 4;
             this.btnDetect.Text = "Detect";
             this.btnDetect.UseVisualStyleBackColor = true;
@@ -85,14 +90,15 @@ namespace MSMQ_socket_form_Csharp
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(533, 300);
             this.Controls.Add(this.btnDetect);
             this.Controls.Add(this.txtData);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnConnect);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form2";
             this.Text = "Form2";
             this.ResumeLayout(false);
