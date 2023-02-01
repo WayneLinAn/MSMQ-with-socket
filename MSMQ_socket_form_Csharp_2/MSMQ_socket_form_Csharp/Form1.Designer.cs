@@ -1,7 +1,7 @@
 ﻿
 namespace MSMQ_socket_form_Csharp
 {
-    partial class Form1
+    partial class Server
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -98,7 +98,7 @@ namespace MSMQ_socket_form_Csharp
             this.txtMessage.Size = new System.Drawing.Size(325, 29);
             this.txtMessage.TabIndex = 6;
             // 
-            // Form1
+            // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -110,7 +110,7 @@ namespace MSMQ_socket_form_Csharp
             this.Controls.Add(this.btnStartServer);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtIP);
-            this.Name = "Form1";
+            this.Name = "Server";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

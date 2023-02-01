@@ -10,3 +10,16 @@ C:\Users\wayne\source\repos\MSMS_Charp_test\MSMS_Charp_test\obj\Debug\MSMQ_Cshar
 C:\Users\wayne\source\repos\MSMS_Charp_test\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.pdb
 C:\Users\wayne\source\repos\MSMS_Charp_test\MSMS_Charp_test\obj\Debug\MSMS_Charp_test.Form4.resources
 C:\Users\wayne\source\repos\MSMS_Charp_test\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.csprojResolveAssemblyReference.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\bin\Debug\MSMQ_Csharp_test.exe.config
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\bin\Debug\MSMQ_Csharp_test.exe
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\bin\Debug\MSMQ_Csharp_test.pdb
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.csproj.AssemblyReference.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMS_Charp_test.Form4.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMS_Charp_test.Form3.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMS_Charp_test.Form2.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMS_Charp_test.Form1.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.Properties.Resources.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.csproj.GenerateResource.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.csproj.CoreCompileInputs.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.exe
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_Csharp_send_receive\MSMS_Charp_test\obj\Debug\MSMQ_Csharp_test.pdb

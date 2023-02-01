@@ -9,3 +9,14 @@ C:\Users\wayne\source\repos\MSMQ_socket_form_Csharp\MSMQ_socket_form_Csharp\obj\
 C:\Users\wayne\source\repos\MSMQ_socket_form_Csharp\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.exe
 C:\Users\wayne\source\repos\MSMQ_socket_form_Csharp\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.pdb
 C:\Users\wayne\source\repos\MSMQ_socket_form_Csharp\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Form2.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\bin\Debug\MSMQ_socket_form_Csharp.exe.config
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\bin\Debug\MSMQ_socket_form_Csharp.exe
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\bin\Debug\MSMQ_socket_form_Csharp.pdb
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.csproj.AssemblyReference.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Form2.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Properties.Resources.resources
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.csproj.GenerateResource.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.csproj.CoreCompileInputs.cache
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.exe
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.pdb
+C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Server.resources

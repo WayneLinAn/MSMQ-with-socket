@@ -15,14 +15,14 @@ using System.Net.Sockets;
 
 namespace MSMQ_socket_form_Csharp
 {
-    public partial class Form1 : Form
+    public partial class Server : Form
     {
 
         private delegate void delUpdateUI(string sMessage);
 
         TcpListener m_server;
         Thread m_thrListening; // 持續監聽是否有Client連線及收值的執行緒
-        public Form1()
+        public Server()
         {
             InitializeComponent();
         }

@@ -12,11 +12,14 @@ using System.Net.Sockets;
 using System.Net;
 using System.Messaging;
 using System.IO;
+using System.Threading;
 
 namespace MSMQ_socket_form_Csharp
 {
     public partial class Form2 : Form
     {
+        private delegate void delUpdateUI(string sMessage);
+
         public class MyData
         {
             public string text;
@@ -27,21 +30,24 @@ namespace MSMQ_socket_form_Csharp
         string strMqName = @".\Private$\samplequeue";
         private TcpClient m_client;
         public MyData pktMsg;
+        MessageQueue msgQueue;
+
         public Form2()
         {
             InitializeComponent();
+            UpdateStatus("Status: Waiting for connection...");
+
         }
 
         private void DetectQueue()
         {
+            msgQueue = new System.Messaging.MessageQueue(strMqName);
+            msgQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(MyData) });
 
-            MessageQueue msgQ = new System.Messaging.MessageQueue(strMqName);
-            msgQ.Formatter = new XmlMessageFormatter(new Type[] { typeof(MyData) });
-
-            msgQ.ReceiveCompleted +=
+            msgQueue.ReceiveCompleted +=
             new ReceiveCompletedEventHandler(MyReceiveCompleted);
 
-            msgQ.BeginReceive();
+            msgQueue.BeginReceive();
         }
         private void MyReceiveCompleted(Object source, ReceiveCompletedEventArgs asyncResult)
         {
@@ -67,11 +73,14 @@ namespace MSMQ_socket_form_Csharp
             //pktMsg = mg.Body.ToString();
             pktMsg = (MyData)mg.Body;
             //Console.WriteLine("Message: " + (string)mg.Body);
-            MessageBox.Show("Message: " + pktMsg.text.ToString());
-            //Send(Encoding.UTF8.GetBytes(pktMsg));
+            //MessageBox.Show("Message: " + pktMsg.text.ToString());
+           // Send(Encoding.UTF8.GetBytes(pktMsg));
+            send_2(pktMsg.text.ToString());
+
             //Code Snippet
             MethodInvoker mi = new MethodInvoker(this.UpdateUI);
-            this.BeginInvoke(mi, null);
+            this.BeginInvoke(mi, pktMsg);
+            Thread.Sleep(200);
             //sbPktMsg.Remove(0, sbPktMsg.Length);
             //sbPktMsg.Append(pktMsg.PacketTime);
             //sbPktMsg.Append(",");
@@ -104,7 +113,14 @@ namespace MSMQ_socket_form_Csharp
         }
         private void UpdateUI()
         {
-            txtData.Text = pktMsg.text.ToString();
+
+            //txtData.Text = pktMsg.text.ToString();
+            //send_2(pktMsg.text.ToString());
+            txtData.AppendText(pktMsg.text.ToString()+"\n");
+            //txtData.BringToFront();
+            //btnSend.PerformClick();
+            //btnSend_Click(new object(), new EventArgs());
+
         }
 
 
@@ -118,7 +134,9 @@ namespace MSMQ_socket_form_Csharp
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e.Message.ToString());
+               // Console.WriteLine(e.Message.ToString());
+                MessageBox.Show(e.Message.ToString());
+
             }
         }
         private void btnConnect_Click(object sender, EventArgs e)
@@ -126,21 +144,29 @@ namespace MSMQ_socket_form_Csharp
             try
             {
                 // Create Tcp client.
-                int nPort = 12345;
-                m_client = new TcpClient("192.168.1.109", nPort);
+                //int nPort = 12345;
+                int nPort = Int32.Parse(txtPort.Text);
+                m_client = new TcpClient(txtIP.Text, nPort);
+                DetectQueue();
+                UpdateStatus("Status: Connect to server and start detecting MSMQ!");
+
             }
             catch (ArgumentNullException a)
             {
-                Console.WriteLine("ArgumentNullException:{0}", a);
+                //Console.WriteLine("ArgumentNullException:{0}", a);
+                MessageBox.Show("ArgumentNullException:" + a);
             }
             catch (SocketException ex)
             {
-                Console.WriteLine("SocketException:{0}", ex);
+                //Console.WriteLine("SocketException:{0}", ex);
+                MessageBox.Show("SocketException:" + ex);
+
             }
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+            //byte[] btData = System.Text.Encoding.ASCII.GetBytes(txtData.Text); // Convert string to byte array.
             byte[] btData = System.Text.Encoding.ASCII.GetBytes(txtData.Text); // Convert string to byte array.
             try
             {
@@ -149,18 +175,61 @@ namespace MSMQ_socket_form_Csharp
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Write Exception:{0}", ex);
+                //Console.WriteLine("Write Exception:{0}", ex);
+                MessageBox.Show("Write Exception:" + ex);
+
+            }
+        }
+        private void send_2(string txt)
+        {
+            byte[] btData = System.Text.Encoding.ASCII.GetBytes(txt); // Convert string to byte array.
+            try
+            {
+                NetworkStream stream = m_client.GetStream();
+                stream.Write(btData, 0, btData.Length); // Write data to server.
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Write Exception:{0}", ex);
+                MessageBox.Show("Write Exception:" + ex);
+
             }
         }
 
         private void btnDisconnect_Click(object sender, EventArgs e)
         {
             m_client.Close();
+            msgQueue.ReceiveCompleted -=
+             new ReceiveCompletedEventHandler(MyReceiveCompleted);
+            msgQueue.Dispose();
+            UpdateStatus("Status: Waiting for connection...");
+        }
+        private void closeReceive(Object source, ReceiveCompletedEventArgs asyncResult)
+        {
+            msgQueue.EndReceive(asyncResult.AsyncResult);
         }
 
         private void btnDetect_Click(object sender, EventArgs e)
         {
             DetectQueue();
+        }
+
+        private void UpdateStatus(string sStatus)
+        {
+            if (this.InvokeRequired)
+            {
+                delUpdateUI del = new delUpdateUI(UpdateStatus);
+                this.Invoke(del, sStatus);
+            }
+            else
+            {
+                labStatus.Text = sStatus;
+            }
+        }
+
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            txtData.Text = "";
         }
     }
 }
