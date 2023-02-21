@@ -20,3 +20,15 @@ C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_sock
 C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.exe
 C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.pdb
 C:\Users\wayne\source\repos\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Server.resources
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\bin\Debug\MSMQ_socket_form_Csharp.exe.config
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\bin\Debug\MSMQ_socket_form_Csharp.exe
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\bin\Debug\MSMQ_socket_form_Csharp.pdb
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.csproj.AssemblyReference.cache
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Server.resources
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Form2.resources
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Properties.Resources.resources
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.csproj.GenerateResource.cache
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.csproj.CoreCompileInputs.cache
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.exe
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.pdb
+D:\Wayne_D\1.Occupation\Transceiver\MSMQ with socket\MSMQ_socket_form_Csharp_2\MSMQ_socket_form_Csharp\obj\Debug\MSMQ_socket_form_Csharp.Form3.resources

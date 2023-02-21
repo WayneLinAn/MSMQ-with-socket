@@ -136,7 +136,68 @@ namespace MSMQ_socket_form_Csharp
             {
                // Console.WriteLine(e.Message.ToString());
                 MessageBox.Show(e.Message.ToString());
+                
+            }
+        }
+        public void reconnect_mechanism()
+        {
+            try
+            {
+                if (m_client.Connected)
+                {
+                    //MessageBox.Show("m_client.Connected: " + m_client.Connected);
 
+                }
+                else
+                {
+                    MessageBox.Show("connection fail: " + m_client.Connected);
+                    int nPort = Int32.Parse(txtPort.Text);
+                    m_client = new TcpClient(txtIP.Text, nPort);
+                }
+            }
+            catch (NullReferenceException Nr)
+            {
+                MessageBox.Show(Nr.Message.ToString());
+                MessageBox.Show("connection fail:");
+                int nPort = Int32.Parse(txtPort.Text);
+                m_client = new TcpClient(txtIP.Text, nPort);
+                //throw;
+            }
+            catch (SocketException ex)
+            {
+                //Console.WriteLine("SocketException:{0}", ex);
+                MessageBox.Show("SocketException:" + ex);
+
+            }
+
+        }
+        public void Start()
+        {
+            while (true)
+            {
+                try
+                {
+                    if (m_client == null)
+                    {
+                        int nPort = Int32.Parse(txtPort.Text);
+                        m_client = new TcpClient(txtIP.Text, nPort);
+                        //m_client.Connect("server_address", server_port);
+                        //Console.WriteLine("Connected to server.");
+                        MessageBox.Show("Connected to server.");
+                    }
+
+                    // Do your work here...
+                    DetectQueue();
+                    UpdateStatus("Status: Connect to server and start detecting MSMQ!");
+
+                }
+                catch (SocketException)
+                {
+                    Console.WriteLine("Lost connection to server.");
+                    m_client = null;
+                }
+
+                Thread.Sleep(1000);
             }
         }
         private void btnConnect_Click(object sender, EventArgs e)
@@ -145,10 +206,18 @@ namespace MSMQ_socket_form_Csharp
             {
                 // Create Tcp client.
                 //int nPort = 12345;
+
+                //<R001>
+
+                // Start();
+                //await StartAsync();
+
+                //<R001>
                 int nPort = Int32.Parse(txtPort.Text);
                 m_client = new TcpClient(txtIP.Text, nPort);
                 DetectQueue();
                 UpdateStatus("Status: Connect to server and start detecting MSMQ!");
+
 
             }
             catch (ArgumentNullException a)
@@ -230,6 +299,70 @@ namespace MSMQ_socket_form_Csharp
         private void btnClearLog_Click(object sender, EventArgs e)
         {
             txtData.Text = "";
+        }
+
+        private void btn_Reconnect_Click(object sender, EventArgs e)
+        {
+            reconnect_mechanism();
+        }
+
+        private TcpClient client;
+        int server_port = 12345;
+
+        public async Task StartAsync()
+        {
+            while (true)
+            {
+                try
+                {
+                    if (client == null)
+                    {
+                        client = new TcpClient();
+                        await client.ConnectAsync("10.110.125.3", server_port);
+                        Console.WriteLine("Connected to server.");
+
+                        // Start a new task to handle data received from the server
+                        _ = Task.Run(() => HandleServerDataAsync(client));
+                    }
+
+                    // Do your work here...
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Connection error: {ex.Message}");
+                    client.Dispose();
+                    client = null;
+                }
+
+                await Task.Delay(1000);
+            }
+        }
+
+        private async Task HandleServerDataAsync(TcpClient client)
+        {
+            try
+            {
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    // Handle data received from the server
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error handling server data: {ex.Message}");
+                client.Dispose();
+                client = null;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //reconnect_mechanism();
+
         }
     }
 }

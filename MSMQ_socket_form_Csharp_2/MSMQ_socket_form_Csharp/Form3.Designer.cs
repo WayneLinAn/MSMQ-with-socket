@@ -1,7 +1,7 @@
 ﻿
 namespace MSMQ_socket_form_Csharp
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@ namespace MSMQ_socket_form_Csharp
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.btnDisconnect = new System.Windows.Forms.Button();
@@ -42,8 +41,6 @@ namespace MSMQ_socket_form_Csharp
             this.txtData = new System.Windows.Forms.RichTextBox();
             this.labStatus = new System.Windows.Forms.Label();
             this.btnClearLog = new System.Windows.Forms.Button();
-            this.btn_Reconnect = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnConnect
@@ -110,7 +107,7 @@ namespace MSMQ_socket_form_Csharp
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(78, 22);
             this.txtIP.TabIndex = 6;
-            this.txtIP.Text = "10.110.125.3";
+            this.txtIP.Text = "10.110.125.1";
             // 
             // txtPort
             // 
@@ -119,7 +116,7 @@ namespace MSMQ_socket_form_Csharp
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(42, 22);
             this.txtPort.TabIndex = 7;
-            this.txtPort.Text = "12345";
+            this.txtPort.Text = "8000";
             // 
             // label2
             // 
@@ -143,7 +140,7 @@ namespace MSMQ_socket_form_Csharp
             // 
             // txtData
             // 
-            this.txtData.Location = new System.Drawing.Point(99, 177);
+            this.txtData.Location = new System.Drawing.Point(99, 176);
             this.txtData.Margin = new System.Windows.Forms.Padding(2);
             this.txtData.Name = "txtData";
             this.txtData.Size = new System.Drawing.Size(404, 65);
@@ -171,28 +168,11 @@ namespace MSMQ_socket_form_Csharp
             this.btnClearLog.UseVisualStyleBackColor = true;
             this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
-            // btn_Reconnect
-            // 
-            this.btn_Reconnect.Location = new System.Drawing.Point(270, 119);
-            this.btn_Reconnect.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Reconnect.Name = "btn_Reconnect";
-            this.btn_Reconnect.Size = new System.Drawing.Size(72, 25);
-            this.btn_Reconnect.TabIndex = 13;
-            this.btn_Reconnect.Text = "Reconnect";
-            this.btn_Reconnect.UseVisualStyleBackColor = true;
-            this.btn_Reconnect.Click += new System.EventHandler(this.btn_Reconnect_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // Form2
+            // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 300);
-            this.Controls.Add(this.btn_Reconnect);
             this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.labStatus);
             this.Controls.Add(this.txtData);
@@ -206,7 +186,7 @@ namespace MSMQ_socket_form_Csharp
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnConnect);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form2";
+            this.Name = "Form3";
             this.Text = "Client & MSMQ";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -227,7 +207,5 @@ namespace MSMQ_socket_form_Csharp
         private System.Windows.Forms.RichTextBox txtData;
         private System.Windows.Forms.Label labStatus;
         private System.Windows.Forms.Button btnClearLog;
-        private System.Windows.Forms.Button btn_Reconnect;
-        private System.Windows.Forms.Timer timer1;
     }
 }
