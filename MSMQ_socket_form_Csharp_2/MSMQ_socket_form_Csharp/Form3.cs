@@ -44,6 +44,10 @@ namespace MSMQ_socket_form_Csharp
         private TcpClient m_client;
         string LocalIP = "10.110.125.1";
         string Localport = "8001";
+        string log_path = @"c:\MSMQ_Socket\export\";
+        string log_file_name = "MSMQ_Socket.log";
+        int reconnect_counter = 0;
+
 
 
         public MyData pktMsg;
@@ -60,77 +64,123 @@ namespace MSMQ_socket_form_Csharp
             public byte[] bPacketData;
         }
 
-
-        private void addlog_plain_txt(string log_content)
+        public enum SendLogType : int
         {
-            StringBuilder sbPktMsg = new StringBuilder("");
-
-            //sbPktMsg.Remove(0, sbPktMsg.Length);
-            //sbPktMsg.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.ffff"));
-            //sbPktMsg.Append(",");
-            //sbPktMsg.Append(LocalIP);
-            //sbPktMsg.Append(",:,");
-            //sbPktMsg.Append(Localport);
-            //sbPktMsg.Append(",");
-            //sbPktMsg.Append(txtIP);
-            //sbPktMsg.Append(",:,");
-            //sbPktMsg.Append(txtPort);
-            //sbPktMsg.Append(",");
-            //sbPktMsg.Append(txtPort);
-            //sbPktMsg.Append(",");
-            //sbPktMsg.Append(strHex);
-            //sbPktMsg.Append("\n");
-
-            StringBuilder sbFilName = new StringBuilder("");
-            sbFilName.Remove(0, sbFilName.Length);
-            sbFilName.Append(@"c:\MSMQ_Socket\export\");
-            sbFilName.Append(DateTime.Now.ToString("yyyyMMdd_HH"));
-            sbFilName.Append("_ORG_All_Message.txt");
-
-            txtExport.writeFile(sbFilName.ToString(),
-                System.Text.ASCIIEncoding.ASCII.GetBytes(log_content+"\n"));
+            try_to_send = 0,
+            receive_ack = 1,
+            send_successful = 2,
+            plain_text = 3
         }
+        //private void addlog(string log_content)
+        //{
+        //    StringBuilder sbPktMsg = new StringBuilder("");
 
-        private void addlog_msg(string mqMsg)
+        //    StringBuilder sbFilName = new StringBuilder("");
+        //    sbFilName.Remove(0, sbFilName.Length);
+        //    sbFilName.Append(@"c:\MSMQ_Socket\export\");
+        //    sbFilName.Append(DateTime.Now.ToString("yyyyMMdd_HH"));
+        //    sbFilName.Append("_MSMQ_Socket.log");
+
+        //    txtExport.writeFile(sbFilName.ToString(),
+        //        System.Text.ASCIIEncoding.ASCII.GetBytes(log_content+"\n"));
+        //}
+
+        private void addlog(string log_content,SendLogType send_log_type)
         {
-            StringBuilder sbPktMsg = new StringBuilder("");
 
-            sbPktMsg.Remove(0, sbPktMsg.Length);
-            sbPktMsg.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.ffff"));
-            sbPktMsg.Append(",");
-            sbPktMsg.Append(LocalIP);
-            sbPktMsg.Append(",:,");
-            sbPktMsg.Append(Localport);
-            sbPktMsg.Append(",");
-            sbPktMsg.Append(txtIP.Text.ToString());
-            sbPktMsg.Append(",:,");
-            sbPktMsg.Append(txtPort.Text.ToString());
-            sbPktMsg.Append(",");
-            sbPktMsg.Append(mqMsg);
-            //sbPktMsg.Append(",");
-            //sbPktMsg.Append(strHex);
-            sbPktMsg.Append("\n");
+            StringBuilder sbPktMsg = new StringBuilder("");
+            if (send_log_type== SendLogType.try_to_send)
+            {
+                sbPktMsg.Remove(0, sbPktMsg.Length);
+                sbPktMsg.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.ffff"));
+                sbPktMsg.Append(",");
+                sbPktMsg.Append("Try to send Data:         ");
+                sbPktMsg.Append("From:{");
+                sbPktMsg.Append(LocalIP + ":" + Localport);
+                sbPktMsg.Append("},");
+                sbPktMsg.Append("To:{");
+                sbPktMsg.Append(txtIP.Text.ToString() + ":" + txtPort.Text.ToString());
+                sbPktMsg.Append("},");
+                sbPktMsg.Append("msg content:[");
+                sbPktMsg.Append(log_content);
+                sbPktMsg.Append("]");
+                //sbPktMsg.Append(",");
+                //sbPktMsg.Append(strHex);
+                sbPktMsg.Append("\n");
+            }
+            else if (send_log_type==SendLogType.send_successful)
+            {
+                sbPktMsg.Remove(0, sbPktMsg.Length);
+                sbPktMsg.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.ffff"));
+                sbPktMsg.Append(",");
+                sbPktMsg.Append("Send Data successfully:   ");
+                sbPktMsg.Append("From:{");
+                sbPktMsg.Append(LocalIP + ":" + Localport);
+                sbPktMsg.Append("},");
+                sbPktMsg.Append("To:{");
+                sbPktMsg.Append(txtIP.Text.ToString() + ":" + txtPort.Text.ToString());
+                sbPktMsg.Append("},");
+                sbPktMsg.Append("msg content:[");
+                sbPktMsg.Append(log_content);
+                sbPktMsg.Append("]");
+                //sbPktMsg.Append(",");
+                //sbPktMsg.Append(strHex);
+                sbPktMsg.Append("\n");
+            }
+            else if(send_log_type== SendLogType.receive_ack)
+            {
+                sbPktMsg.Remove(0, sbPktMsg.Length);
+                sbPktMsg.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.ffff"));
+                sbPktMsg.Append(",");
+                sbPktMsg.Append("Receive ack successfully: ");
+                sbPktMsg.Append("From:{");
+                sbPktMsg.Append(txtIP.Text.ToString() + ":" + txtPort.Text.ToString());
+                sbPktMsg.Append("},");
+                sbPktMsg.Append("To:{");
+                sbPktMsg.Append(LocalIP + ":" + Localport);
+                sbPktMsg.Append("},");
+                sbPktMsg.Append("msg content:[");
+                sbPktMsg.Append(log_content);
+                sbPktMsg.Append("]");
+                //sbPktMsg.Append(",");
+                //sbPktMsg.Append(strHex);
+                sbPktMsg.Append("\n");
+            }
+            else if (send_log_type == SendLogType.plain_text)
+            {
+                sbPktMsg.Remove(0, sbPktMsg.Length);
+                sbPktMsg.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.ffff"));
+                sbPktMsg.Append(",");
+                sbPktMsg.Append(log_content);
+                sbPktMsg.Append("\n");
+            }
+
 
             StringBuilder sbFilName = new StringBuilder("");
             sbFilName.Remove(0, sbFilName.Length);
-            sbFilName.Append(@"c:\MSMQ_Socket\export\");
-            sbFilName.Append(DateTime.Now.ToString("yyyyMMdd_HH"));
-            sbFilName.Append("_ORG_All_Message.txt");
+            sbFilName.Append(log_path);
+            sbFilName.Append(DateTime.Now.ToString("yyyyMMdd_HH_"));
+            sbFilName.Append(log_file_name);
 
             txtExport.writeFile(sbFilName.ToString(),
                 System.Text.ASCIIEncoding.ASCII.GetBytes(sbPktMsg.ToString()));
+            //txtData.AppendText("abv" + "\n");
+            //txtData.ScrollToCaret();
         }
+
+       
         public Form3()
         {
             InitializeComponent();
             UpdateStatus("Status: Waiting for connection...");
-            addlog_plain_txt("Program Start");
+            //addlog("Program Start");
+            addlog("Program Start", SendLogType.plain_text);
         }
         private void PeekQueue()
         {
+            reconnect_counter = 0;
             msgQueue = new System.Messaging.MessageQueue(strMqName);
             msgQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(MyData) });
-
             msgQueue.PeekCompleted += new
                 PeekCompletedEventHandler(MyPeekCompleted);
 
@@ -149,7 +199,6 @@ namespace MSMQ_socket_form_Csharp
 
             // Display message information on the screen.
             pktMsg = (MyData)m.Body;
-
             if (Send_ReadAck(pktMsg.text.ToString()))
             {
                 //Code Snippet
@@ -159,7 +208,24 @@ namespace MSMQ_socket_form_Csharp
             }
             else
             {
-                MessageBox.Show("Send_ReadAck("+ pktMsg.text.ToString() + ") fail");
+
+                //reconnect_counter++;
+                ////Thread.Sleep(3000);
+                //if (!m_client.Connected && reconnect_counter>=3)
+                //{
+                //    disconnect_with_type(disconnect_type.reconnect);
+                //    //goto reconnect;
+                //}
+                //else
+                //{
+                //    addlog("Can't send msg, reconnect counter[" + reconnect_counter + "]", SendLogType.plain_text);
+                //}
+                //MessageBox.Show("Send_ReadAck("+ pktMsg.text.ToString() + ") fail");
+                //MessageBox.Show("m_client.Connected(" + m_client.Connected + ")");
+                if (!m_client.Connected)
+                {
+                    disconnect_with_type(disconnect_type.reconnect);
+                }
             }
             // Restart the asynchronous peek operation.
             mq.BeginPeek();
@@ -269,9 +335,12 @@ namespace MSMQ_socket_form_Csharp
                     ns.ReadTimeout = 3000;
                     ns.Read(bytes, 0, m_client.ReceiveBufferSize);
                     msg = Encoding.ASCII.GetString(bytes); //the message incoming
+                    string[] words = msg.Split(' ');
+                    addlog(words[0], SendLogType.receive_ack);
                 }
                 if (msg.Contains("Ack")) //需要的ack格式在此修改，目前假定字串中有Ack字樣就會通過
                 {
+                    //addlog("Receive Ack successful");
                     return true;
                 }
 
@@ -293,26 +362,25 @@ namespace MSMQ_socket_form_Csharp
             try
             {
                 int nPort = Int32.Parse(txtPort.Text);
-                //m_client = new TcpClient(txtIP.Text, nPort);
-                IPEndPoint _ipLocalEndPoint;
-                IPEndPoint _serverEndPoint;
-                //TcpClient m_client;
-                //IPAddress localAddress = "10.110.125.1";
-
-                _ipLocalEndPoint = new IPEndPoint(IPAddress.Parse(LocalIP), int.Parse(Localport));
-                m_client = new TcpClient(_ipLocalEndPoint);
-
-                _serverEndPoint = new IPEndPoint(IPAddress.Parse(txtIP.Text.ToString()), nPort);
-                m_client.Connect(_serverEndPoint);
-
-
-                LingerOption lingerOption = new LingerOption(true, 1);
+                //reconnect:
+                reconnect:
+                try
+                {
+                    m_client = new TcpClient(txtIP.Text, nPort);
+                }
+                catch (Exception)
+                {
+                    addlog("Connect fail, wait for 5 second to reconnect.", SendLogType.plain_text);
+                    Thread.Sleep(5000);
+                    goto reconnect;
+                }
                 
-                m_client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger, lingerOption);
-                //DetectQueue();
+                
                 PeekQueue();
                 reconnect_mode = disconnect_type.reconnect;
                 UpdateStatus("Status: Connect to server and start detecting MSMQ!");
+                addlog("Connect to server and start detecting MSMQ!", SendLogType.plain_text);
+
                 return true;
 
             }
@@ -330,38 +398,83 @@ namespace MSMQ_socket_form_Csharp
         }
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            //try
+            //{
+            //    while (!connect())
+            //    {
+            //        log connect fail try to  reconnect 
+            //        disconnect_with_type(disconnect_type.reconnect);
+            //    }
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
+            connect();
+            //StartClient();
+            //log connect successfully
+        }
+
+        private void StartClient()
+        {
+            string serverHost = "10.110.125.1";
+            int serverPort = 8000;
+            TcpClient client = null;
+            NetworkStream stream = null;
+
+        connect:
             try
             {
-                while (!connect())
-                {
-                    //log connect fail try to  reconnect 
-                    disconnect_with_type(disconnect_type.reconnect);
-                }
-            }
-            catch (Exception)
-            {
+                // connect to the server
+                client = new TcpClient(serverHost, serverPort);
+                //stream = client.GetStream();
+                Console.WriteLine("Connected to server.");
 
-                throw;
+                //// send data to the server
+                //string message = "Hello, server!";
+                //byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+                //stream.Write(data, 0, data.Length);
+
+                //// receive data from the server
+                //data = new byte[1024];
+                //int bytes = stream.Read(data, 0, data.Length);
+                //string responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                //Console.WriteLine("Received from server: " + responseData);
+                PeekQueue();
+                reconnect_mode = disconnect_type.reconnect;
+                UpdateStatus("Status: Connect to server and start detecting MSMQ!");
+                addlog("Connect to server and start detecting MSMQ!", SendLogType.plain_text);
+
+                // close the client and stream
+                //stream.Close();
+                //client.Close();
             }
-            
-            //log connect successfully
+            catch (Exception ex)
+            {
+                // if an exception occurs, wait 5 seconds and try again
+                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Retrying in 5 seconds...");
+                Thread.Sleep(5000);
+                goto connect;
+            }
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
             //byte[] btData = System.Text.Encoding.ASCII.GetBytes(txtData.Text); // Convert string to byte array.
-            byte[] btData = System.Text.Encoding.ASCII.GetBytes(txtData.Text); // Convert string to byte array.
-            try
-            {
-                NetworkStream stream = m_client.GetStream();
-                stream.Write(btData, 0, btData.Length); // Write data to server.
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Write Exception:{0}", ex);
-                MessageBox.Show("Write Exception:" + ex);
+            //byte[] btData = System.Text.Encoding.ASCII.GetBytes(txtData.Text); // Convert string to byte array.
+            //try
+            //{
+            //    NetworkStream stream = m_client.GetStream();
+            //    stream.Write(btData, 0, btData.Length); // Write data to server.
+            //}
+            //catch (Exception ex)
+            //{
+            //    //Console.WriteLine("Write Exception:{0}", ex);
+            //    MessageBox.Show("Write Exception:" + ex);
 
-            }
+            //}
         }
 
         private bool Send_ReadAck(string txt)
@@ -373,6 +486,8 @@ namespace MSMQ_socket_form_Csharp
                 NetworkStream stream = m_client.GetStream();
                 byte[] btData = System.Text.Encoding.ASCII.GetBytes(txt); // Convert string to byte array.
                 stream.Write(btData, 0, btData.Length); // Write data to server.
+                //addlog("Try to send Data:");
+                addlog(txt,SendLogType.try_to_send);
 
                 int counter = 0;
                 while (!Read_Ack_2(stream) && counter < 3)
@@ -391,7 +506,7 @@ namespace MSMQ_socket_form_Csharp
                 else
                 {
                    
-                    UpdateStatus("Data sent successfully");
+                    UpdateStatus("Data sent successfully, keep peeking MSMQ");
                     //MessageBox.Show("Data sent successfully");
                     delete_first_queue();
                     return true;
@@ -419,7 +534,9 @@ namespace MSMQ_socket_form_Csharp
                 System.Messaging.Message message = myQueue.Receive(timeout);//接收訊息佇列內的訊息
 
                 MyData data = (MyData)message.Body;//將訊息內容轉成正確型別
-                addlog_msg(data.text.ToString());
+                addlog(data.text.ToString(),SendLogType.send_successful);
+
+                //addlog_msg(data.text.ToString());
                 //tb_body_rcv.Text = data.text.ToString();
                 //tb_title_rcv.Text = message.Label.ToString();
                 //MessageBox.Show(data.text.ToString());
@@ -445,15 +562,24 @@ namespace MSMQ_socket_form_Csharp
 
                 if (type == disconnect_type.click)
                 {
-                    m_client.Close();
+                    if (m_client!=null)
+                    {
+                        m_client.Close();
+                    }
+                    if (msgQueue!=null)
+                    {
+                        msgQueue.PeekCompleted -= new
+                            PeekCompletedEventHandler(MyPeekCompleted);
 
-                    msgQueue.PeekCompleted -= new
-                        PeekCompletedEventHandler(MyPeekCompleted);
 
-
-                    msgQueue.Dispose();
+                        msgQueue.Dispose();
+                    }
                     UpdateStatus("Status: Waiting for connection...");
+                    addlog("Click disconnect!", SendLogType.plain_text);
+
                     reconnect_mode = disconnect_type.click;
+                    
+                    
                 }
                 else if (type == disconnect_type.reconnect && reconnect_mode == disconnect_type.reconnect)
                 {
@@ -464,6 +590,7 @@ namespace MSMQ_socket_form_Csharp
                         PeekCompletedEventHandler(MyPeekCompleted);
                     msgQueue.Dispose();
                     UpdateStatus("Status: Trying to reconnect...");
+                    addlog("Time out waiting for Ack, Trying to reconnect!", SendLogType.plain_text);
 
                     Thread.Sleep(5000);
                     connect();
